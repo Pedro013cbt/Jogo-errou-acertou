@@ -1,0 +1,32 @@
+using System;
+
+class Program {
+  public static void Main (string[] args) 
+ {  Console.Write("Digite a quantidade de participantes: ");
+        int quantidadeParticipantes = int.Parse(Console.ReadLine());
+        string[] nomesParticipantes = new string[quantidadeParticipantes];
+        for (int i = 0; i < quantidadeParticipantes; i++) {
+            Console.Write($"Digite o nome do {i+1}º participante: ");
+            nomesParticipantes[i] = Console.ReadLine();
+        }
+       
+        Random random = new Random();
+        int numeroOculto = random.Next(1, 101);
+       
+        string perdedor = null;
+        while (perdedor == null) {
+            for (int i = 0; i < quantidadeParticipantes; i++) {
+                Console.Write($"{nomesParticipantes[i]}, digite um número entre 1 e 100: ");
+                int palpite = int.Parse(Console.ReadLine());
+                if (palpite == numeroOculto) {
+                    perdedor = nomesParticipantes[i];
+                    break;
+                } else if (palpite < numeroOculto) {
+                    Console.WriteLine("O número oculto é maior.");
+                } else {
+                    Console.WriteLine("O número oculto é menor.");
+                }
+            }
+        }
+        
+        Console.WriteLine($"{perdedor} perdeu! O número oculto era {numeroOculto}.");
